@@ -1,4 +1,4 @@
-# MessagingService
+# ChatService
 
 Websocket 을 활용한 실시간 메세징 서비스
 

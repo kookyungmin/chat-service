@@ -1,4 +1,4 @@
-package net.happykoo.messagingservice;
+package net.happykoo.chat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

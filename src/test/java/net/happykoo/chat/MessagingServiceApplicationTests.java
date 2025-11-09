@@ -1,4 +1,4 @@
-package net.happykoo.messagingservice;
+package net.happykoo.chat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

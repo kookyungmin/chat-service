@@ -1,7 +1,7 @@
-package net.happykoo.messagingservice.configs;
+package net.happykoo.chat.config;
 
 import lombok.RequiredArgsConstructor;
-import net.happykoo.messagingservice.handlers.WebSocketChatHandler;
+import net.happykoo.chat.handler.WebSocketChatHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;

@@ -1,21 +1,21 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: ms-mysql
+    container_name: chat-mysql
     volumes:
-      - ./mysql/my.cnf:/etc/mysql/conf.d/ms.cnf
+      - ./mysql/my.cnf:/etc/mysql/conf.d/chat.cnf
       - ./mysql/data:/var/lib/mysql
     ports:
       - '13306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=localroot
-      - MYSQL_DATABASE=vcs
+      - MYSQL_DATABASE=chat
       - MYSQL_USER=local
       - MYSQL_PASSWORD=local
     restart: always
   redis:
     image: redis:7.2.5
-    container_name: ms-redis
+    container_name: chat-redis
     ports:
       - '16379:6379'
     restart: always

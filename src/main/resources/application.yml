@@ -1,6 +1,19 @@
 spring:
   application:
-    name: messaging-service
+    name: chat-service
+  datasource:
+    url: jdbc:mysql://localhost:13306/chat
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
   security:
     oauth2:
       client:

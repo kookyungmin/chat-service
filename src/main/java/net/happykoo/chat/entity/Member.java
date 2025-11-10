@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.happykoo.chat.constant.GenderType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -22,6 +23,8 @@ public class Member {
 
     private String email;
 
+    private String password;
+
     private String nickName;
 
     private String name;
@@ -34,4 +37,11 @@ public class Member {
     private LocalDate birthDate;
 
     private String role;
+
+    public void updatePassword(String password, String confirmPassword, PasswordEncoder passwordEncoder) {
+        if (!password.equals(confirmPassword)) {
+            throw new IllegalArgumentException("패스워드가 일치하지 않습니다.");
+        }
+        this.password = passwordEncoder.encode(password);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
@@ -22,6 +23,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class StompChatController {
     private final ChatService chatService;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/chats/{roomId}")
     @SendTo("/sub/chats/{roomId}")
@@ -30,6 +32,7 @@ public class StompChatController {
         String text = payload.get("message");
         log.info("{}: {} sent {}", roomId, user.getName(), text);
         chatService.createMessage(user.getMember(), roomId,text);
+        simpMessagingTemplate.convertAndSend("/sub/chats/news", roomId);
         return new ChatMessage(user.getMember().getName(), text);
     }
 }

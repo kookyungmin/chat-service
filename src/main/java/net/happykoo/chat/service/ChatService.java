@@ -66,8 +66,11 @@ public class ChatService {
     public List<ChatRoomResponse> getChatRoomList(Member member) {
         List<MemberRoomMapping> memberRoomMappings = memberRoomMappingRepository.findAllByMemberId(member.getId());
         return memberRoomMappings.stream()
-                .map(MemberRoomMapping::getRoom)
-                .map(ChatRoomResponse::from)
+                .map(mapping -> {
+                    Room room = mapping.getRoom();
+                    boolean hasNewMessage = messageRepository.existsByRoomIdAndCreatedAtAfter(mapping.getRoom().getId(), mapping.getLastCheckedAt());
+                    return ChatRoomResponse.from(room, hasNewMessage);
+                })
                 .toList();
     }
 
@@ -83,7 +86,14 @@ public class ChatService {
         return ChatMessage.from(message);
     }
 
-    public List<ChatMessage> getMassageByRoomId(Long roomId) {
+    @Transactional
+    public List<ChatMessage> getMassageByRoomId(Member member, Long roomId) {
+        MemberRoomMapping mapping = memberRoomMappingRepository.findByMemberIdAndRoomId(member.getId(), roomId)
+                .orElseThrow(IllegalArgumentException::new);
+
+        mapping.updateLastCheckedAt();
+        memberRoomMappingRepository.save(mapping);
+
         return messageRepository.findAllByRoomId(roomId)
                 .stream()
                 .map(ChatMessage::from)

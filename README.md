@@ -2,7 +2,7 @@
 
 Websocket 을 활용한 실시간 메세징 서비스
 
-구조는 심플한 구조로 구성되며, Websocket 과 Stomp 사용 방법에 집중
+구조는 심플한 구조로 구성되며, Websocket 과 Stomp 사용 방법에 집중 (레디스를 이용한 클러스터링 포함)
 
 <!-- prettier-ignore-start -->
 ![SpringBoot](https://shields.io/badge/springboot-black?logo=springboot&style=for-the-badge%22)
@@ -36,4 +36,5 @@ Websocket 을 활용한 실시간 메세징 서비스
 
 ### Redis
 `docker exec -it ms-redis sh` \
-`redis-cli`
+`redis-cli` \
+`subscribe chats-2 //subscribe 확인`

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import net.happykoo.chat.constant.GenderType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity(name = "member")
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Builder
-public class Member {
+public class Member implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;

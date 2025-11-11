@@ -21,6 +21,12 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
     open-in-view: false
+  session:
+    store-type: redis
+  data:
+    redis:
+      host: localhost
+      port: 16379
   security:
     oauth2:
       client:

@@ -28,6 +28,7 @@ public class StompChatController {
     @MessageMapping("/chats/{roomId}")
     @SendTo("/sub/chats/{roomId}")
     public ChatMessageDto handleMessage(Principal principal, @DestinationVariable Long roomId, @Payload Map<String, String> payload) {
+        //TODO: 클러스터링 된 서버를 고려하면 메시지를 kafka 등의 Message Queue 를 이용하여 메시지를 전달해야함
         CustomOAuth2User user = (CustomOAuth2User) ((AbstractAuthenticationToken) principal).getPrincipal();
         String text = payload.get("message");
         log.info("{}: {} sent {}", roomId, user.getName(), text);
